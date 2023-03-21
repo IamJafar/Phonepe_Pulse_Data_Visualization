@@ -38,6 +38,15 @@ The insights on the website and in the report have been drawn from two key sourc
         from streamlit_option_menu import option_menu
         from PIL import Image
         from git.repo.base import Repo
+        
+ ### Step 2:
+ 
+ **Data extraction:** 
+
+   Clone the Github using scripting to fetch the data from the Phonepe pulse Github repository and store it in a suitable format such as CSV or JSON. Use the below syntax to clone the phonepe github repository into your local drive.
+    
+        from git.repo.base import Repo
+        Repo.clone_from("GitHub Clone URL","Path to get the cloded files")
 
 
 
