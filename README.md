@@ -92,10 +92,48 @@ Looping through each and every folder and opening the json files appending only 
                 
     df = pd.DataFrame(columns1)
    
-##### Converting the dataframe into csv file
+ ##### Converting the dataframe into csv file
     df.to_csv('filename.csv',index=False)
 
+ ### Step 4:
+ 
+ **Database insertion:**
+ 
+   To insert the datadrame into SQL first I've created a new database and tables using **"mysql-connector-python"** library in Python to connect to a MySQL database and insert the transformed data using SQL commands.
+   
+   **Creating the connection between python and mysql**
+   
+        mydb = sql.connect(host="localhost",
+                   user="username",
+                   password="password",
+                   database= "phonepe_pulse"
+                  )
+        mycursor = mydb.cursor(buffered=True)
+        
+   **Creating tables**
+   
+       mycursor.execute("create table 'Table name' (col1 varchar(100), col2 int, col3 int, col4 varchar(100), col5 int, col6 double)")
 
+        for i,row in df.iterrows():
+        
+            #here %S means string values 
+            sql = "INSERT INTO agg_trans VALUES (%s,%s,%s,%s,%s,%s)"
+            mycursor.execute(sql, tuple(row))
+            
+            # the connection is not auto committed by default, so we must commit to save our changes
+            mydb.commit()
+    
+ ### Step 5:
+ 
+ **Dashboard creation:**
+ 
+   To create colourful and insightful dashboard I've used Plotly libraries in Python to create an interactive and visually appealing dashboard. Plotly's built-in Pie, Bar, Geo map functions are used to display the data on a charts and map and Streamlit is used to create a user-friendly interface with multiple dropdown options for users to select different facts and figures to display.
+    
+ ### Step 6:
+ 
+ **Data retrieval:**
+ 
+   Finally if needed Using the "mysql-connector-python" library to connect to the MySQL database and fetch the data into a Pandas dataframe.
 
 
 
